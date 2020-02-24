@@ -1,7 +1,12 @@
 
 public abstract class Role {
 	
-	public abstract void generateId();
-	
 	public abstract void setPermission();
+	
+	public abstract String getPermission();
+	
+	public abstract String getName();
+	
+	public abstract String getId();
+	
 }

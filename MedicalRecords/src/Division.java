@@ -1,12 +1,18 @@
 
 public class Division {
-	private String division;
+	private String name;
 	
-	public Division(String division) {
-		this.division = division;
+	public Division(String name) {
+		this.name = name;
 	}
 	
 	public String getDivision() {
-		return division;
+		return name;
+	}
+	public void setPermission() {
+		//Implement
+	}
+	public String getPermission() {
+		return null;
 	}
 }
