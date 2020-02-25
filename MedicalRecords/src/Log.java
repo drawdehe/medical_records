@@ -5,7 +5,9 @@ public class Log {
 	public LocalDateTime time;
 	public String text;
 	
-	public Log() {
-		
+	public Log(Role user, LocalDateTime time, String text) {
+		this.user = user;
+		this.time = time;
+		this.text = text;
 	}
 }
