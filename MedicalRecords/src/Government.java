@@ -2,11 +2,9 @@ import java.util.UUID;
 
 public class Government extends Role {
 	private String name;
-	private String id;
 	
 	public Government(String name) {
 		this.name = name;
-		id = UUID.randomUUID().toString();
 	}
 
 	@Override
@@ -25,10 +23,5 @@ public class Government extends Role {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public String getId() {
-		return id;
 	}
 }

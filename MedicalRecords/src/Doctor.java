@@ -2,12 +2,12 @@ import java.util.UUID;
 
 public class Doctor extends Role {
 	private String name;
-	private String id;
+	private final String personalNumber;
 	private Division division;
 	
-	public Doctor(String name, Division division) {
+	public Doctor(String name, String personalNumber, Division division) {
 		this.name = name;
-		id = UUID.randomUUID().toString();
+		this.personalNumber = personalNumber;
 		this.division = division;
 	}
 
@@ -28,10 +28,8 @@ public class Doctor extends Role {
 	public String getName() {
 		return name;
 	}
-
-	@Override
-	public String getId() {
-		return id;
+	public String getPersonalNumber() {
+		return personalNumber;
 	}
 	public Division getDivision() {
 		return division;

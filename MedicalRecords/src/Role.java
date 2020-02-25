@@ -7,6 +7,6 @@ public abstract class Role {
 	
 	public abstract String getName();
 	
-	public abstract String getId();
+	//public abstract String getPersonalNumber();
 	
 }

@@ -2,11 +2,11 @@ import java.util.UUID;
 
 public class Admin extends Role {
 	private String name;
-	private String id;
+	private final String personalNumber;
 	
-	public Admin(String name) {
+	public Admin(String name, String personalNumber) {
 		this.name = name;
-		id = UUID.randomUUID().toString();
+		this.personalNumber = personalNumber;
 		
 	}
 
@@ -26,10 +26,8 @@ public class Admin extends Role {
 	public String getName() {
 		return name;
 	}
-
-	@Override
-	public String getId() {
-		return id;
+	public String getPersonalNumber() {
+		return personalNumber;
 	}
 	
 }
