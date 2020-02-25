@@ -23,6 +23,6 @@ public class Launcher {
 		Patient patientC = new Patient("Patient C", "000000-00", divisionB);
 		
 		System.out.println(nurseA.getName());
-		System.out.println(nurseA.getPersonalNumber());
+		System.out.println(nurseA.getSsn());
 	}
 }

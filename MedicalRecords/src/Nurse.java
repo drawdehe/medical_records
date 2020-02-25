@@ -2,12 +2,12 @@ import java.util.UUID;
 
 public class Nurse extends Role {
 	private String name;
-	private final String personalNumber;
+	private final String ssn;
 	private Division division;
 	
-	public Nurse (String name, String personalNumber, Division division) {
+	public Nurse (String name, String ssn, Division division) {
 		this.name = name;
-		this.personalNumber = personalNumber;
+		this.ssn = ssn;
 		this.division = division;
 	}
 
@@ -28,8 +28,8 @@ public class Nurse extends Role {
 	public String getName() {
 		return name;
 	}
-	public String getPersonalNumber() {
-		return personalNumber;
+	public String getSsn() {
+		return ssn;
 	}
 	public Division getDivision() {
 		return division;

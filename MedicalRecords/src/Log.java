@@ -1,7 +1,8 @@
+import java.time.LocalDateTime;
 
 public class Log {
 	public Role user;
-	public Time time;
+	public LocalDateTime time;
 	public String text;
 	
 	public Log() {

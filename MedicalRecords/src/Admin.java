@@ -2,11 +2,11 @@ import java.util.UUID;
 
 public class Admin extends Role {
 	private String name;
-	private final String personalNumber;
+	private final String ssn;
 	
-	public Admin(String name, String personalNumber) {
+	public Admin(String name, String ssn) {
 		this.name = name;
-		this.personalNumber = personalNumber;
+		this.ssn = ssn;
 		
 	}
 
@@ -26,8 +26,8 @@ public class Admin extends Role {
 	public String getName() {
 		return name;
 	}
-	public String getPersonalNumber() {
-		return personalNumber;
+	public String getSsn() {
+		return ssn;
 	}
 	
 }
