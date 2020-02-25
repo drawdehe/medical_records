@@ -1,7 +1,7 @@
 
 public class Authenticator {
-	public String ssn;
-	public String password;
+	private String ssn;
+	private String password;
 	
 //	/* Skapar en Authenticator */ 
 	public Authenticator(String ssn, String password) {
