@@ -4,7 +4,8 @@ public class Authenticator {
 	public String password;
 	
 //	/* Skapar en Authenticator */ 
-	public Authenticator() {
-		
+	public Authenticator(String ssn, String password) {
+		this.ssn = ssn;
+		this.password = password;		
 	}
 }
