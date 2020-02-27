@@ -80,6 +80,7 @@ en array av strings  -> [username, group]. när rätt username hittats returnera
                 br.close();
             }
     }
+/* tar subject strängen vi får från certifikatet och parsar den, hämtar ut fältet Common Name (CN = ) och returerar den*/
     public String getName(String subject){
         String name = "";
         for(int i = 0; i < subject.length()-2; i++){
@@ -93,6 +94,9 @@ en array av strings  -> [username, group]. när rätt username hittats returnera
         }
         return name;
     }
+/* isAssociated går in i en map som ska vara sparad för varje patient, om patientens namn är Alban skulle mapen heta Alban, while loopen stegar 
+igenom varje line med br.readline(), om den hittar en line som är samma subjektets namn returneras true, om det aldrig hittas returneras false.
+varje line i file.txt består endast av ett personnummer på en läkare eller sjuksyster som är associerad med patienten.*/
     public Boolean isAssociated(String name, String patient) throws FileNotFoundException, IOException{
         String file = patient+"/file.txt";
 
