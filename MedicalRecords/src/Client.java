@@ -14,7 +14,7 @@ import java.util.Scanner;
  * the firewall by following SSLSocketClientWithTunneling.java.
  */
 public class Client {
-    
+    /*göra frågar tre frågor till användaren och returnerar svaren som en array av strings */
     public String[] göra() throws IOException{
         System.out.println("Read, Write or Delete?");
         String[] toDo = new String[3];
