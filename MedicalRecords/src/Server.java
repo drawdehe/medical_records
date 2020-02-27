@@ -14,7 +14,7 @@ public class Server implements Runnable {
         serverSocket = ss;
         newListener();
     }
-
+/* hämtar ut Organization (O) och Organisation Unit (OU) från Subject strängen vi får av certifikatet*/
     public String[] getGroupPrivilege(String subject){
         String group = "";
         String privilege = "";
@@ -41,7 +41,8 @@ public class Server implements Runnable {
         result[1]= privilege;
         return result;
     }
-
+/* tror inte denna används men den läser typ lines från en en sträng och splittar den där det är ett mellanrum, t.ex "elias password" blir
+[elias, password] och sparas sen i hashmap med användar namn o lösen*/
     public HashMap read(String username) throws FileNotFoundException, IOException{
         BufferedReader br = new BufferedReader(new FileReader("file.txt"));
         HashMap<String, String> passwords = new HashMap<String, String>();
@@ -58,6 +59,9 @@ public class Server implements Runnable {
                 br.close();
             }
     }
+/* öppnar filen file.tx, läser in rader, br.readline tar nästa rad i texten, läsningen avslutas när det inte finns någon line kvar eller
+om man har hittat rätt username. Varje line i textfilen ser ut såhär "username group". line splittas vid mellanrum och blir till 
+en array av strings  -> [username, group]. när rätt username hittats returneras group. om rätt username inte hittas returneras "-1" */
     public String getGroup(String username) throws FileNotFoundException, IOException{
         BufferedReader br = new BufferedReader(new FileReader("file.txt"));
         try {
