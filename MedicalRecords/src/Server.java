@@ -14,7 +14,8 @@ public class Server implements Runnable {
         serverSocket = ss;
         newListener();
     }
-/* hämtar ut Organization (O) och Organisation Unit (OU) från Subject strängen vi får av certifikatet*/
+/* hämtar ut Organization (O) och Organisation Unit (OU) från Subject strängen vi får av certifikatet, kan t.ex vara O = division B och
+OU = doctor*/
     public String[] getGroupPrivilege(String subject){
         String group = "";
         String privilege = "";
@@ -116,7 +117,8 @@ varje line i file.txt består endast av ett personnummer på en läkare eller sj
             }
     }
 /*getPass tar in vad subjektet vill göra, subjektet som vi fått från certifikatet,patientens namn och namnet på journalen (doc).
-det finns sedan olika cases fsom tar hänsyn till vad subjektet har för roll, samt de andra variablerna*/
+det finns sedan olika cases fsom tar hänsyn till vad subjektet har för roll, samt de andra variablerna. funktionen använder sig av get groupprivilege
+isAssociated och getName*/
     public Boolean getPass(String action, String subject, String patient, String doc) throws FileNotFoundException, IOException{
         String[] groupPrivilege = getGroupPrivilege(subject);
         String name = getName(subject);
