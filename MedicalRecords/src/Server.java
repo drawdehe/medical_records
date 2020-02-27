@@ -115,9 +115,11 @@ varje line i file.txt består endast av ett personnummer på en läkare eller sj
                 br.close();
             }
     }
-
-    public Boolean getPass(String action, String subject, String patient) throws FileNotFoundException, IOException{
+/*getPass tar in vad subjektet vill göra, subjektet som vi fått från certifikatet,patientens namn och namnet på journalen (doc).
+det finns sedan olika cases fsom tar hänsyn till vad subjektet har för roll, samt de andra variablerna*/
+    public Boolean getPass(String action, String subject, String patient, String doc) throws FileNotFoundException, IOException{
         String[] groupPrivilege = getGroupPrivilege(subject);
+        String name = getName(subject);
         switch(groupPrivilege[1]){
 
             case "government":
@@ -133,15 +135,33 @@ varje line i file.txt består endast av ett personnummer på en läkare eller sj
                 }
                 return false;
             }
-            if(action.equals("write"))
+            if(action.equals("write")){
+                if(isAssociated(name, patient)){
+                    return true;
+                }
+                return false;
+            }
             break;
 
             case "nurse":
-            return false;
+            if(action.equals("read")){
+                if(groupPrivilege[0].equals(getGroup(patient))){
+                    return true;
+                }
+                return false;
+            }
+            if(action.equals("write") && !doc.equals("new")){
+                if(isAssociated(name, patient)){
+                    return true;
+                }
+                return false;
+            }
+            break;
 
         }
         return false;
     }
+
     public void run() {
         try {
             SSLSocket socket=(SSLSocket)serverSocket.accept();
