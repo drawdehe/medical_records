@@ -9,12 +9,12 @@ public class PatientFileManager {
 		Scanner scan = null;
 		scan = new Scanner(new File(file+".txt"));
 
-		String[] list = new String[5];
-		for (int i = 0; i < 5; i++) {
+		String[] list = new String[6];
+		for (int i = 0; i < 6; i++) {
 			list[i] = scan.nextLine();
 			System.out.println(list[i]);
 		}
-		return new PatientFile(list[0], list[1], list[2], list[3], list[4]);
+		return new PatientFile(list[0], list[1], list[2], list[3], list[4], list[5]);
 	}
 
 	public String delete(String subject, String patient) throws FileNotFoundException, IOException{
