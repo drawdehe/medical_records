@@ -31,6 +31,7 @@ public class Server implements Runnable {
 			System.out.println("client name (cert issuer DN field): " + issuer);
 			System.out.println(serial);
 			System.out.println(numConnectedClients + " concurrent connection(s)\n");
+			
 			HashMap läs = read("ss");
 			System.out.println(läs.get("rrrrr"));
 			PrintWriter out = null;
@@ -49,6 +50,8 @@ public class Server implements Runnable {
 				out.println(rev);
 				out.flush();
 			}
+			
+			
 			in.close();
 			out.close();
 			socket.close();
