@@ -63,6 +63,7 @@ en array av strings  -> [username, group]. när rätt username hittats returnera
             } finally {
                 br.close();
             }
+        
     }
 /* tar subject strängen vi får från certifikatet och parsar den, hämtar ut fältet Common Name (CN = ) och returerar den*/
     public String getName(String subject){

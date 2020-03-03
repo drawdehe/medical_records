@@ -1,2 +1,2 @@
-(1583239680240) user: doctorsson, operation: write, patient: patientsson, Access: true
-(1583239680241) user: doctorsson, operation: write, patient: patientsson, Access: false
+(1583240667807) User: doctorsson, Operation: write, Patient: patientsson, Access: GRANTED
+(1583240667809) User: doctorsson, Operation: write, Patient: patientsson, Access: DENIED
