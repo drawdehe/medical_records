@@ -52,7 +52,6 @@ public class Server implements Runnable {
 			
 			
 			
-			
 			while ((clientMsg = in.readLine()) != null) {
 				String rev = new StringBuilder(clientMsg).reverse().toString();
 				out.println(rev);
