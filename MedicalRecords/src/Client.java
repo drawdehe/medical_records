@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Client {
     /*göra frågar tre frågor till användaren och returnerar svaren som en array av strings */
-    public String[] göra() throws IOException{
+    public String[] whatToDo() throws IOException{
         System.out.println("Read, Write or Delete?");
         String[] toDo = new String[3];
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -102,7 +102,7 @@ public class Client {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String msg;
-            String[] toDo = klas.göra();
+            String[] toDo = klas.whatToDo();
 			for (;;) {
                 System.out.print(">");
                 msg = read.readLine();
