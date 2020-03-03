@@ -16,6 +16,15 @@ public class PatientFileManager {
 		}
 		return new PatientFile(list[0], list[1], list[2], list[3], list[4]);
 	}
+
+	public String delete(String subject, String patient) throws FileNotFoundException, IOException{
+		File file = new File(patient);
+		if(file.delete()){
+			return file.getName() + " deleted";
+		}else{
+			return "nope";
+		}
+	}
 	
 	public void createFile(String fileName, PatientFile pf) throws FileNotFoundException {
 		try {
