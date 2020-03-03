@@ -54,6 +54,7 @@ public class Client {
             System.out.println("USAGE: java client host port");
             System.exit(-1);
         }
+        
         try { /* set up a key manager for client authentication */
             SSLSocketFactory factory = null;
             try {
@@ -63,6 +64,7 @@ public class Client {
                 System.out.print("Password:");
                 String pw = read.readLine();
                 char[] password = pw.toCharArray();
+                
                 KeyStore ks = KeyStore.getInstance("JKS");
                 KeyStore ts = KeyStore.getInstance("JKS");
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
