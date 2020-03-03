@@ -91,6 +91,8 @@ en array av strings  -> [username, group]. när rätt username hittats returnera
                     i++;
                 }
                 break;
+                
+                //testkommentar
             }
         }
         return name;
