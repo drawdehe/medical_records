@@ -40,6 +40,17 @@ public class Log {
 
 	}
 	
+	public static void main (String [] args) throws IOException {
+		//For test purposes
+		Log log = new Log();
+		Boolean perm = true;
+		String doctorsson = "doctorsson";
+		String patientsson = "patientsson";
+		String write = "write";
+		newLogEntry(doctorsson, patientsson, write, true);
+		newLogEntry(doctorsson, patientsson, write, false);
+	}
+	
 	public static void newLogEntry(String ssn_user, String ssn_patient, String operation, Boolean permission) {
 		String access;
 		if(permission) {
@@ -52,7 +63,7 @@ public class Log {
 			FileWriter fw = new FileWriter("Log.txt", true);
 			
 			fw.append("(" + System.currentTimeMillis() + ") " + 
-					"user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient +
+					"User: " + ssn_user + ", Operation: " + operation + ", Patient: " + ssn_patient +
 					", Access: " + access +"\n");
 			fw.close();
 		} catch (IOException e) {	
@@ -66,14 +77,5 @@ public class Log {
 //		bw.newLine();
 //	}
 	
-	public static void main (String [] args) throws IOException {
-		//For test purposes
-		Log log = new Log();
-		Boolean perm = true;
-		String doctorsson = "doctorsson";
-		String patientsson = "patientsson";
-		String write = "write";
-		newLogEntry(doctorsson, patientsson, write, true);
-		newLogEntry(doctorsson, patientsson, write, false);
-	}
+
  }
