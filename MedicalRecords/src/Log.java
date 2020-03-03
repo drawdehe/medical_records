@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
@@ -10,8 +11,9 @@ public class Log {
 	//private String ssn_patient;
 	//private String operation;
 	//private Boolean permission;
-	private LocalDateTime time;
+	//private LocalDateTime time;
 	//private String text;
+	private File file;
 	private PrintWriter writer;
 	
 	public Log() throws UnsupportedEncodingException, FileNotFoundException {
@@ -20,10 +22,13 @@ public class Log {
 		this.operation = operation;
 		this.permission = false;
 		this.time = time.now();*/
+		//this.time = time;
+		file = new File ("C:/Users/ed2576sj-s/Desktop/log.txt");
 		writer = new PrintWriter("log.txt", "UTF-8");
 	}
 	public void accessed(String ssn_user, String ssn_patient, String operation, Boolean permission) {
-		writer.println("user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient + ", date: " + time);
+		LocalDateTime now = LocalDateTime.now();
+		writer.println("user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient + ", date: " + now);
 	}
 	public static void main (String [] args) throws UnsupportedEncodingException, FileNotFoundException {
 		//For test purposes
