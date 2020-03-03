@@ -18,6 +18,7 @@ public class Server implements Runnable {
 
 	public void run() {
 		try {
+			Authorization auth = new Authorization();
 			SSLSocket socket = (SSLSocket) serverSocket.accept();
 			newListener();
 			SSLSession session = socket.getSession();
@@ -50,7 +51,8 @@ public class Server implements Runnable {
 			String patient = in.readLine();
 			String doc = in.readLine();
 			
-			
+			Boolean pss = auth.getPass(action,subject, patient, doc);
+            		System.out.println(pss);
 			
 			while ((clientMsg = in.readLine()) != null) {
 				String rev = new StringBuilder(clientMsg).reverse().toString();
