@@ -104,7 +104,7 @@ varje line i file.txt består endast av ett personnummer på en läkare eller sj
 /*getPass tar in vad subjektet vill göra, subjektet som vi fått från certifikatet,patientens namn och namnet på journalen (doc).
 det finns sedan olika cases fsom tar hänsyn till vad subjektet har för roll, samt de andra variablerna. funktionen använder sig av get groupprivilege
 isAssociated och getName*/
-    public Boolean getPass(String action, String subject, String patient, String doc) throws FileNotFoundException, IOException{
+    public Boolean getPass(String action, String subject, String patient, String document) throws FileNotFoundException, IOException{
         String[] groupPrivilege = getGroupPrivilege(subject);
         String name = getName(subject);
         switch(groupPrivilege[1]){
@@ -140,7 +140,7 @@ isAssociated och getName*/
                 }
                 return false;
             }
-            if(action.equals("write") && !doc.equals("new")){
+            if(action.equals("write") && !document.equals("new")){
                 if(isAssociated(name, patient)){
                     return true;
                 }

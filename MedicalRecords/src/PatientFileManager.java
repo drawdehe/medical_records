@@ -16,7 +16,15 @@ public class PatientFileManager {
 		}
 		return new PatientFile(list[0], list[1], list[2], list[3], list[4]);
 	}
-
-	//hey
 	
+	public void createFile(String fileName, PatientFile pf) throws FileNotFoundException {
+		try {
+			FileWriter fw = new FileWriter(new File(fileName + ".txt"));
+			
+			fw.write(pf.toString());
+			fw.close();
+		} catch (IOException e) {	
+			e.printStackTrace();
+		}
+	}
 }
