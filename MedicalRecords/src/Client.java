@@ -37,7 +37,7 @@ public class Client {
     }
 
     public static void main(String[] args) throws Exception {
-        Client klas = new Client();
+        Client client = new Client();
         String host = null;
         int port = -1;
         for (int i = 0; i < args.length; i++) {
@@ -102,7 +102,7 @@ public class Client {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String msg;
-            String[] toDo = klas.whatToDo();
+            String[] toDo = client.whatToDo();
 			for (;;) {
                 System.out.print(">");
                 msg = read.readLine();
