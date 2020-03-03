@@ -22,6 +22,8 @@ public class Server implements Runnable {
 			newListener();
 			SSLSession session = socket.getSession();
 			X509Certificate cert = (X509Certificate) session.getPeerCertificateChain()[0];
+			
+			
 			String subject = cert.getSubjectDN().getName();
 			String issuer = cert.getIssuerDN().getName();
 			int serial = cert.getSerialNumber().intValue();
@@ -32,8 +34,7 @@ public class Server implements Runnable {
 			System.out.println(serial);
 			System.out.println(numConnectedClients + " concurrent connection(s)\n");
 			
-			HashMap läs = read("ss");
-			System.out.println(läs.get("rrrrr"));
+			
 			PrintWriter out = null;
 			BufferedReader in = null;
 			out = new PrintWriter(socket.getOutputStream(), true);
@@ -42,9 +43,16 @@ public class Server implements Runnable {
 			Boolean name = isAssociated(getName(subject), "1");
 			System.out.println(name);
 			String clientMsg = null;
+			
+			
+			//tar emot kommandon här
 			String action = in.readLine();
 			String patient = in.readLine();
 			String doc = in.readLine();
+			
+			
+			
+			
 			while ((clientMsg = in.readLine()) != null) {
 				String rev = new StringBuilder(clientMsg).reverse().toString();
 				out.println(rev);
