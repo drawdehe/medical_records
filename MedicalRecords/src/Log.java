@@ -16,31 +16,49 @@ public class Log {
 	//private Boolean permission;
 	//private LocalDateTime time;
 	//private String text;
-	private BufferedWriter bw;
-	private FileWriter writer;
+
+//	private BufferedWriter bw;
+//	private FileWriter writer;
 	
-	public Log() throws IOException {
-		/*this.ssn_user = ssn_user;
-		this.ssn_patient = ssn_patient;
-		this.operation = operation;
-		this.permission = false;
-		this.time = time.now();*/
-		//this.time = time;
-		FileWriter writer = new FileWriter("log.txt");
-		bw = new BufferedWriter(writer);
+//	public Log() throws IOException {
+//		/*this.ssn_user = ssn_user;
+//		this.ssn_patient = ssn_patient;
+//		this.operation = operation;
+//		this.permission = false;
+//		this.time = time.now();*/
+//		//this.time = time;
+//		FileWriter writer = new FileWriter("log.txt");
+//		bw = new BufferedWriter(writer);
+//	}
+	public Log() {
+		
 	}
-	public void accessed(String ssn_user, String ssn_patient, String operation, Boolean permission) throws IOException {
-		LocalDateTime now = LocalDateTime.now();
-		bw.write("user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient + ", date: " + now);
-		bw.newLine();
+	
+	public static void newLogEntry(String ssn_user, String ssn_patient, String operation, Boolean permission) {
+		try {
+			FileWriter fw = new FileWriter("Log.txt", true);
+			
+			fw.append("(" + System.currentTimeMillis() + ") " + 
+					"user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient +
+					", Access: " + permission +"\n");
+			fw.close();
+		} catch (IOException e) {	
+			e.printStackTrace();
+		}
 	}
+	
+//	public void accessed(String ssn_user, String ssn_patient, String operation, Boolean permission) throws IOException {
+//		LocalDateTime now = LocalDateTime.now();
+//		bw.write("user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient + ", date: " + now);
+//		bw.newLine();
+//	}
+	
 	public static void main (String [] args) throws IOException {
 		//For test purposes
-		Log log = new Log();
 		Boolean perm = true;
 		String doctorsson = "doctorsson";
 		String patientsson = "patientsson";
 		String write = "write";
-		log.accessed(doctorsson, patientsson, write, perm);
+		newLogEntry(doctorsson, patientsson, write, perm);
 	}
  }
