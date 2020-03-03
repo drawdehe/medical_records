@@ -14,7 +14,8 @@ public class Server implements Runnable {
         serverSocket = ss;
         newListener();
     }
-
+/* hämtar ut Organization (O) och Organisation Unit (OU) från Subject strängen vi får av certifikatet, kan t.ex vara O = division B och
+OU = doctor*/
     public String[] getGroupPrivilege(String subject){
         String group = "";
         String privilege = "";
@@ -41,7 +42,8 @@ public class Server implements Runnable {
         result[1]= privilege;
         return result;
     }
-
+/* tror inte denna används men den läser typ lines från en en sträng och splittar den där det är ett mellanrum, t.ex "elias password" blir
+[elias, password] och sparas sen i hashmap med användar namn o lösen*/
     public HashMap read(String username) throws FileNotFoundException, IOException{
         BufferedReader br = new BufferedReader(new FileReader("file.txt"));
         HashMap<String, String> passwords = new HashMap<String, String>();
@@ -58,6 +60,9 @@ public class Server implements Runnable {
                 br.close();
             }
     }
+/* öppnar filen file.tx, läser in rader, br.readline tar nästa rad i texten, läsningen avslutas när det inte finns någon line kvar eller
+om man har hittat rätt username. Varje line i textfilen ser ut såhär "username group". line splittas vid mellanrum och blir till 
+en array av strings  -> [username, group]. när rätt username hittats returneras group. om rätt username inte hittas returneras "-1" */
     public String getGroup(String username) throws FileNotFoundException, IOException{
         BufferedReader br = new BufferedReader(new FileReader("file.txt"));
         try {
@@ -76,6 +81,7 @@ public class Server implements Runnable {
                 br.close();
             }
     }
+/* tar subject strängen vi får från certifikatet och parsar den, hämtar ut fältet Common Name (CN = ) och returerar den*/
     public String getName(String subject){
         String name = "";
         for(int i = 0; i < subject.length()-2; i++){
@@ -85,10 +91,15 @@ public class Server implements Runnable {
                     i++;
                 }
                 break;
+                
+                //testkommentar
             }
         }
         return name;
     }
+/* isAssociated går in i en map som ska vara sparad för varje patient, om patientens namn är Alban skulle mapen heta Alban, while loopen stegar 
+igenom varje line med br.readline(), om den hittar en line som är samma subjektets namn returneras true, om det aldrig hittas returneras false.
+varje line i file.txt består endast av ett personnummer på en läkare eller sjuksyster som är associerad med patienten.*/
     public Boolean isAssociated(String name, String patient) throws FileNotFoundException, IOException{
         String file = patient+"/file.txt";
 
@@ -107,9 +118,12 @@ public class Server implements Runnable {
                 br.close();
             }
     }
-
-    public Boolean getPass(String action, String subject, String patient) throws FileNotFoundException, IOException{
+/*getPass tar in vad subjektet vill göra, subjektet som vi fått från certifikatet,patientens namn och namnet på journalen (doc).
+det finns sedan olika cases fsom tar hänsyn till vad subjektet har för roll, samt de andra variablerna. funktionen använder sig av get groupprivilege
+isAssociated och getName*/
+    public Boolean getPass(String action, String subject, String patient, String doc) throws FileNotFoundException, IOException{
         String[] groupPrivilege = getGroupPrivilege(subject);
+        String name = getName(subject);
         switch(groupPrivilege[1]){
 
             case "government":
@@ -125,15 +139,33 @@ public class Server implements Runnable {
                 }
                 return false;
             }
-            if(action.equals("write"))
+            if(action.equals("write")){
+                if(isAssociated(name, patient)){
+                    return true;
+                }
+                return false;
+            }
             break;
 
             case "nurse":
-            return false;
+            if(action.equals("read")){
+                if(groupPrivilege[0].equals(getGroup(patient))){
+                    return true;
+                }
+                return false;
+            }
+            if(action.equals("write") && !doc.equals("new")){
+                if(isAssociated(name, patient)){
+                    return true;
+                }
+                return false;
+            }
+            break;
 
         }
         return false;
     }
+
     public void run() {
         try {
             SSLSocket socket=(SSLSocket)serverSocket.accept();
