@@ -36,4 +36,14 @@ public class PatientFileManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public void writeToFile(String fileName, String data) throws FileNotFoundException {
+		PatientFile pf = readFile(fileName);
+		System.out.println("Before: " + pf.toString());
+		pf.appendMedicalText(data);
+		System.out.println(pf.getMedicalInfo());
+		System.out.println("After: " + pf.toString());
+		
+		createFile(fileName, pf);
+	}
 }
