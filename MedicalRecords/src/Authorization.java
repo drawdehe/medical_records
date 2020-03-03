@@ -133,7 +133,7 @@ public class Authorization {
 			throws FileNotFoundException, IOException {
 		String[] groupPrivilege = getGroupPrivilege(subject);
 		String name = getName(subject);
-		switch (groupPrivilege[1]) {
+		switch (groupPrivilege[0]) {
 
 		case "government":
 			if (action.equals("delete")) {
@@ -146,7 +146,7 @@ public class Authorization {
 
 		case "doctor":
 			if (action.equals("read")) {
-				if (groupPrivilege[0].equals(getGroup(patient))) {
+				if (groupPrivilege[1].equals(getGroup(patient))) {
 					return true;
 				}
 				return false;
@@ -161,7 +161,7 @@ public class Authorization {
 
 		case "nurse":
 			if (action.equals("read")) {
-				if (groupPrivilege[0].equals(getGroup(patient))) {
+				if (groupPrivilege[1].equals(getGroup(patient))) {
 					return true;
 				}
 				return false;
