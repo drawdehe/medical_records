@@ -42,24 +42,7 @@ OU = doctor*/
         result[1]= privilege;
         return result;
     }
-/* tror inte denna används men den läser typ lines från en en sträng och splittar den där det är ett mellanrum, t.ex "elias password" blir
-[elias, password] och sparas sen i hashmap med användar namn o lösen*/
-    public HashMap read(String username) throws FileNotFoundException, IOException{
-        BufferedReader br = new BufferedReader(new FileReader("file.txt"));
-        HashMap<String, String> passwords = new HashMap<String, String>();
-        try {
-            String line = br.readLine();
 
-            while (line != null) {
-                String[] user = line.split(" ", 0);
-                passwords.put(user[0], user[1]);
-                line = br.readLine();
-            }
-                return passwords;
-            } finally {
-                br.close();
-            }
-    }
 /* öppnar filen file.tx, läser in rader, br.readline tar nästa rad i texten, läsningen avslutas när det inte finns någon line kvar eller
 om man har hittat rätt username. Varje line i textfilen ser ut såhär "username group". line splittas vid mellanrum och blir till 
 en array av strings  -> [username, group]. när rätt username hittats returneras group. om rätt username inte hittas returneras "-1" */
@@ -92,7 +75,7 @@ en array av strings  -> [username, group]. när rätt username hittats returnera
                 }
                 break;
                 
-                //testkommentar
+              
             }
         }
         return name;
@@ -261,4 +244,29 @@ isAssociated och getName*/
         }
         return null;
     }
+    
+    //////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
+    
+    
+    /* tror inte denna används men den läser typ lines från en en sträng och splittar den där det är ett mellanrum, t.ex "elias password" blir
+    [elias, password] och sparas sen i hashmap med användar namn o lösen*/
+        public HashMap read(String username) throws FileNotFoundException, IOException{
+            BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+            HashMap<String, String> passwords = new HashMap<String, String>();
+            try {
+                String line = br.readLine();
+
+                while (line != null) {
+                    String[] user = line.split(" ", 0);
+                    passwords.put(user[0], user[1]);
+                    line = br.readLine();
+                }
+                    return passwords;
+                } finally {
+                    br.close();
+                }
+        }
+    
 }
