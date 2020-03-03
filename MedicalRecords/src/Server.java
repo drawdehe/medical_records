@@ -130,6 +130,9 @@ isAssociated och getName*/
             if(action.equals("delete")){
                 return true;
             }
+            if(action.equals("read")) {
+            	return true;
+            }            
             break;
 
             case "doctor":
