@@ -1,0 +1,2 @@
+(1583239680240) user: doctorsson, operation: write, patient: patientsson, Access: true
+(1583239680241) user: doctorsson, operation: write, patient: patientsson, Access: false

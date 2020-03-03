@@ -31,16 +31,29 @@ public class Log {
 //		bw = new BufferedWriter(writer);
 //	}
 	public Log() {
-		
+		try {
+			FileWriter fw = new FileWriter(new File("Log.txt"));
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	public static void newLogEntry(String ssn_user, String ssn_patient, String operation, Boolean permission) {
+		String access;
+		if(permission) {
+			access = "GRANTED";
+		} else {
+			access = "DENIED";
+		}
+
 		try {
 			FileWriter fw = new FileWriter("Log.txt", true);
 			
 			fw.append("(" + System.currentTimeMillis() + ") " + 
 					"user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient +
-					", Access: " + permission +"\n");
+					", Access: " + access +"\n");
 			fw.close();
 		} catch (IOException e) {	
 			e.printStackTrace();
@@ -55,10 +68,12 @@ public class Log {
 	
 	public static void main (String [] args) throws IOException {
 		//For test purposes
+		Log log = new Log();
 		Boolean perm = true;
 		String doctorsson = "doctorsson";
 		String patientsson = "patientsson";
 		String write = "write";
-		newLogEntry(doctorsson, patientsson, write, perm);
+		newLogEntry(doctorsson, patientsson, write, true);
+		newLogEntry(doctorsson, patientsson, write, false);
 	}
  }
