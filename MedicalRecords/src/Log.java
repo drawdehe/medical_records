@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
@@ -13,24 +16,25 @@ public class Log {
 	//private Boolean permission;
 	//private LocalDateTime time;
 	//private String text;
-	private File file;
-	private PrintWriter writer;
+	private BufferedWriter bw;
+	private FileWriter writer;
 	
-	public Log() throws UnsupportedEncodingException, FileNotFoundException {
+	public Log() throws IOException {
 		/*this.ssn_user = ssn_user;
 		this.ssn_patient = ssn_patient;
 		this.operation = operation;
 		this.permission = false;
 		this.time = time.now();*/
 		//this.time = time;
-		file = new File ("C:/Users/ed2576sj-s/Desktop/log.txt");
-		writer = new PrintWriter("log.txt", "UTF-8");
+		FileWriter writer = new FileWriter("log.txt");
+		bw = new BufferedWriter(writer);
 	}
-	public void accessed(String ssn_user, String ssn_patient, String operation, Boolean permission) {
+	public void accessed(String ssn_user, String ssn_patient, String operation, Boolean permission) throws IOException {
 		LocalDateTime now = LocalDateTime.now();
-		writer.println("user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient + ", date: " + now);
+		bw.write("user: " + ssn_user + ", operation: " + operation + ", patient: " + ssn_patient + ", date: " + now);
+		bw.newLine();
 	}
-	public static void main (String [] args) throws UnsupportedEncodingException, FileNotFoundException {
+	public static void main (String [] args) throws IOException {
 		//For test purposes
 		Log log = new Log();
 		Boolean perm = true;
