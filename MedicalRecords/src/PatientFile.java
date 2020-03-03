@@ -11,7 +11,6 @@ public class PatientFile {
 			data[3] = division;
 			data[4] = text;
 		}	
-		//hello
 		
 		public String getPatientName() {
 			return data[0];
@@ -38,7 +37,7 @@ public class PatientFile {
 		}
 		
 		public String toString() {
-			return data[0];
+			return data[0] + "\n" + data[1] + "\n" + data[2] + "\n" + data[3] + "\n" + data[4];
 		}
 
 }
