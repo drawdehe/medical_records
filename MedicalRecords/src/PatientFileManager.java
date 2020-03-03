@@ -18,7 +18,7 @@ public class PatientFileManager {
 	}
 
 	public String delete(String subject, String patient) throws FileNotFoundException, IOException{
-		File file = new File(patient);
+		File file = new File(patient+ ".txt");
 		if(file.delete()){
 			return file.getName() + " deleted";
 		}else{
