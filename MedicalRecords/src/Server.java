@@ -52,27 +52,27 @@ public class Server implements Runnable {
 			//tar emot kommandon hÃ¤r
 			String action = in.readLine(); //Command: Read/Write/Add/Delete
 			String patientSSN = in.readLine(); //SSN
-			String data = in.readLine();<
+			String data = in.readLine();
 			
-			String[] certInfo = subject.split("=");
-			for (int i = 1; i < 4; i++) {
-				certInfo[i - 1] = certInfo[i].substring(0, certInfo[i].indexOf(','));
-			}			
+			Authorization authZ = new Authorization();
+			String[] certInfo = new String[2];
+			certInfo[0] = authZ.getName(subject);
+			certInfo[1] = authZ.getGroupPrivilege(subject)[0];
+			certInfo[2] = authZ.getGroupPrivilege(subject)[1];
 			
-			Log log = new log();
-			PatientFile pf = PatientFileManager.readFile(patientSSN);
+			PatientFileManager man = new PatientFileManager();
+			Log log = new Log();
+			PatientFile pf = man.readFile(patientSSN);
 			Boolean permission = false;
-
-			Boolean pss = auth.getPass(action,subject, patient, doc);
 
 			
 			if(action == "read") {
 			
 				if(pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0] || pf.getPatientName() == certInfo[0]
-						|| pf.getPatientDivision() == certInfo[1] || certInfo[2]  == "Government") {
+						|| pf.getDivision() == certInfo[1] || certInfo[2]  == "Government") {
 					permission = true;
 			
-					out.println(pf.toString);
+					out.println(pf.toString());
 					out.flush();			
 				} 
 			}
@@ -80,9 +80,7 @@ public class Server implements Runnable {
 			if(action == "write") {
 				if((certInfo[2]  == "Doctor" || certInfo[2] == "Nurse") && (pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0])) {
 					permission = true;
-			
-					PatientFileManager.writeToFile(patientSSN, data);
-			
+					man.writeToFile(patientSSN, data);
 					out.println("Appended the text!");
 					out.flush();			
 				} 
@@ -91,10 +89,8 @@ public class Server implements Runnable {
 			if(action == "add") {
 				if(certInfo[2]  == "Doctor") {
 					permission = true;
-			
-					String[] pInf = data.split(":");
-					PatientFileManager.createFile(patientSSN, new PatientFile(pInfo[0], patientSSN, certInfo[0], pInfo[3], pInfo[4], pInfo[5]));
-			
+					String[] pInfo = data.split(":");
+					man.createFile(patientSSN, new PatientFile(pInfo[0], patientSSN, certInfo[0], pInfo[3], pInfo[4], pInfo[5]));
 					out.println("Added the patient!");
 					out.flush();			
 				} 
@@ -103,9 +99,7 @@ public class Server implements Runnable {
 			if(action == "delete") {
 				if(certInfo[2]  == "Government") {
 					permission = true;
-			
-					PatientFileManager.deleteFile(patientSSN);
-			
+					man.delete(patientSSN);
 					out.println("Deleted the patient!");
 					out.flush();			
 				} 
