@@ -40,25 +40,90 @@ public class Server implements Runnable {
 			BufferedReader in = null;
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			String[] res = getGroupPrivilege(subject);
-			Boolean name = isAssociated(getName(subject), "1");
+//			String[] res = getGroupPrivilege(subject);
+//			Boolean name = isAssociated(getName(subject), "1");
 			System.out.println(name);
 			String clientMsg = null;
 			
 			
-			//tar emot kommandon här
-			String action = in.readLine();
-			String patient = in.readLine();
-			String doc = in.readLine();
+			///////////////////////////////////////////////
+			///////////////////////////////////////////////
+			////////////STORA ANDRINGAR
+			//tar emot kommandon hÃ¤r
+			String action = in.readLine(); //Command: Read/Write/Add/Delete
+			String patientSSN = in.readLine(); //SSN
+			String data = in.readLine();<
 			
+<<<<<<< HEAD
+			String[] certInfo = subject.split("=");
+			for (int i = 1; i < 4; i++) {
+			certInfo[i - 1] = certInfo[i].substring(0, certInfo[i].indexOf(','));
+			}			
+			
+			Log log = new log();
+			PatientFile pf = PatientFileManager.readFile(patientSSN);
+			Boolean permission = false;
+=======
 			Boolean pss = auth.getPass(action,subject, patient, doc);
             		System.out.println(pss);
+>>>>>>> branch 'master' of https://github.com/drawdehe/MedicalRecords.git
 			
-			while ((clientMsg = in.readLine()) != null) {
-				String rev = new StringBuilder(clientMsg).reverse().toString();
-				out.println(rev);
-				out.flush();
+			if(action == "read") {
+			
+			if(pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0] || pf.getPatientName() == certInfo[0]
+			|| pf.getPatientDivision() == certInfo[1] || certInfo[2]  == "Government") {
+			permission = true;
+			
+			out.println(pf.toString);
+			out.flush();			
+			} 
 			}
+			
+			if(action == "write") {
+			if((certInfo[2]  == "Doctor" || certInfo[2] == "Nurse") && (pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0])) {
+			permission = true;
+			
+			PatientFileManager.writeToFile(patientSSN, data);
+			
+			out.println("Appended the text!");
+			out.flush();			
+			} 
+			}
+			
+			if(action == "add") {
+			if(certInfo[2]  == "Doctor") {
+			permission = true;
+			
+			String[] pInf = data.split(":");
+			PatientFileManager.createFile(patientSSN, new PatientFile(pInfo[0], patientSSN, certInfo[0], pInfo[3], pInfo[4], pInfo[5]));
+			
+			out.println("Added the patient!");
+			out.flush();			
+			} 
+			}
+			
+			if(action == "delete") {
+			if(certInfo[2]  == "Government") {
+			permission = true;
+			
+			PatientFileManager.deleteFile(patientSSN);
+			
+			out.println("Deleted the patient!");
+			out.flush();			
+			} 
+			}	
+			
+			//Error/Deny Message
+			log.newLogEntry(certInfo[0], patientSSN, action, permission);
+			if(!permission) {
+			
+			out.println("Request to " + action + " has been DENIED! (or failed)");
+			out.flush();	
+			}
+			
+			/////////////////////////////////////////////////
+			/////////////////////////////////////////////////
+			////////////////////////////////////////////////
 			
 			
 			in.close();
