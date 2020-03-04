@@ -54,19 +54,18 @@ public class Server implements Runnable {
 			String patientSSN = in.readLine(); //SSN
 			String data = in.readLine();<
 			
-<<<<<<< HEAD
 			String[] certInfo = subject.split("=");
 			for (int i = 1; i < 4; i++) {
-			certInfo[i - 1] = certInfo[i].substring(0, certInfo[i].indexOf(','));
+				certInfo[i - 1] = certInfo[i].substring(0, certInfo[i].indexOf(','));
 			}			
 			
 			Log log = new log();
 			PatientFile pf = PatientFileManager.readFile(patientSSN);
 			Boolean permission = false;
-=======
+
 			Boolean pss = auth.getPass(action,subject, patient, doc);
             		System.out.println(pss);
->>>>>>> branch 'master' of https://github.com/drawdehe/MedicalRecords.git
+
 			
 			if(action == "read") {
 			
