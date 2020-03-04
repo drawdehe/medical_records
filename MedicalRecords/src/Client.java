@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Client {
     
-	/*göra frågar tre frågor till användaren och returnerar svaren som en array av strings */
+    /*göra frågar tre frågor till användaren och returnerar svaren som en array av strings */
     public String[] whatToDo() throws IOException{
         System.out.println("Read, Write, Add or Delete?"); //la till add
         String[] toDo = new String[3];
@@ -33,17 +33,16 @@ public class Client {
         msg = read.readLine();
         toDo[1] = msg;
         
-        if(toDo[0] == "write") {
-        	System.out.println("Data to append: ");
-        	msg = read.readLine();
-        	toDo[2] = msg;
+        if(toDo[0].equals("write")) {
+            System.out.println("Data to append: ");
+            msg = read.readLine();
+            toDo[2] = msg;
         } 
-        if(toDo[0] == "add") {	
-        	System.out.println("Input: <patient name>:<patient ssn>:<doctor>:<nurse>:<division>:<data>");
-        	msg = read.readLine();
-        	toDo[2] = msg;
+        if(toDo[0].equals("add")) {  
+            System.out.println("Input: <patient name>:<patient ssn>:<doctor>:<nurse>:<division>:<data>");
+            msg = read.readLine();
+            toDo[2] = msg;
         }
-        	
         return toDo;
     }
     
@@ -83,10 +82,10 @@ public class Client {
                 TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
                 SSLContext ctx = SSLContext.getInstance("TLS");
                 ks.load(new FileInputStream(userName+"keystore"), password);  // keystore password (storepass)
-				ts.load(new FileInputStream("clienttruststore"), password); // truststore password (storepass);
-				kmf.init(ks, password); // user password (keypass)
-				tmf.init(ts); // keystore can be used as truststore here
-				ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
+                ts.load(new FileInputStream("clienttruststore"), password); // truststore password (storepass);
+                kmf.init(ks, password); // user password (keypass)
+                tmf.init(ts); // keystore can be used as truststore here
+                ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
                 factory = ctx.getSocketFactory();
             } catch (Exception e) {
                 throw new IOException(e.getMessage());
@@ -115,20 +114,20 @@ public class Client {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String msg;
             String[] toDo = client.whatToDo();
-			for (;;) {
+            for (;;) {
                 System.out.print(">");
                 msg = read.readLine();
                 if (msg.equalsIgnoreCase("quit")) {
-				    break;
-				}
+                    break;
+                }
                 out.println(toDo[0]);
                 out.println(toDo[1]);
                 out.println(toDo[2]);
                 out.flush();
             }
             in.close();
-			out.close();
-			read.close();
+            out.close();
+            read.close();
             socket.close();
         } catch (Exception e) {
             e.printStackTrace();
