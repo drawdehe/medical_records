@@ -1,10 +1,9 @@
-
 public class PatientFile {
 
 		private String[] data;
 		
 		public PatientFile(String name, String ssn, String doctor, String nurse, String division, String text) {
-			data = new String[5];
+			data = new String[6];
 			data[0] = name;
 			data[1] = ssn;
 			data[2] = doctor;
