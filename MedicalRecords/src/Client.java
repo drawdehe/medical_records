@@ -14,27 +14,39 @@ import java.util.Scanner;
  * the firewall by following SSLSocketClientWithTunneling.java.
  */
 public class Client {
-    /*göra frågar tre frågor till användaren och returnerar svaren som en array av strings */
+    
+	/*göra frågar tre frågor till användaren och returnerar svaren som en array av strings */
     public String[] whatToDo() throws IOException{
-        System.out.println("Read, Write or Delete?");
+        System.out.println("Read, Write, Add or Delete?"); //la till add
         String[] toDo = new String[3];
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         String msg = read.readLine();
         msg = msg.toLowerCase();
-        while(!(msg.equals("read") || msg.equals("write") || msg.equals("delete"))){
-            System.out.println("Not an option, please re-enter read, write or delete?");
+        while(!(msg.equals("read") || msg.equals("write") || msg.equals("add") || msg.equals("delete"))){ //la till add
+            System.out.println("Not an option, please re-enter read, write, add or delete?");
             msg = read.readLine();
             msg = msg.toLowerCase(); 
         }
-        toDo[0] = "read";
-        System.out.println("User ID of patient:");
+        toDo[0] = msg; //bytte från fast "read"
+        
+        System.out.println("Patient SSN:"); //omformulerade
         msg = read.readLine();
         toDo[1] = msg;
-        System.out.println("Journal ID, if new enter 'new', if all enter 'all'");
-        msg = read.readLine();
-        toDo[2] = msg;
+        
+        if(toDo[0] == "write") {
+        	System.out.println("Data to append: ");
+        	msg = read.readLine();
+        	toDo[2] = msg;
+        } 
+        if(toDo[0] == "add") {	
+        	System.out.println("Input: <patient name>:<patient ssn>:<doctor>:<nurse>:<division>:<data>");
+        	msg = read.readLine();
+        	toDo[2] = msg;
+        }
+        	
         return toDo;
     }
+    
 
     public static void main(String[] args) throws Exception {
         Client client = new Client();

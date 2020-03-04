@@ -6,8 +6,9 @@ import java.util.HashMap;
 
 public class Authorization {
 
-	
-
+	public Authorization() {
+		
+	}
 	/*
 	 * öppnar filen file.tx, läser in rader, br.readline tar nästa rad i texten,
 	 * läsningen avslutas när det inte finns någon line kvar eller om man har hittat
@@ -16,53 +17,7 @@ public class Authorization {
 	 * group]. när rätt username hittats returneras group. om rätt username inte
 	 * hittas returneras "-1"
 	 */
-<<<<<<< HEAD
-	public String getDivison(String ssn_patient) throws FileNotFoundException, IOException {
-//
-//		String file = ssn_patient + ".txt";
-//		BufferedReader br = new BufferedReader(new FileReader(file));
-//		try {
-//			for(int i = 0; i < §)
-//			String line = br.readLine();
-//			while (line != null) {
-//				String[] user = line.split(" ", 0);
-//				System.out.println(user[0]);
-//				if (user[0].equals(ssn_patient)) {
-//					return user[1];
-//				}
-//				line = br.readLine();
-//			}
-//			return "-1";
-//		} finally {
-//			br.close();
-//		}
-		
-=======
 
-<<<<<<< HEAD
-=======
->>>>>>> branch 'master' of https://github.com/drawdehe/MedicalRecords.git
-		return "-1";
-		
-	}
-
-	/*
-	 * tar subject strängen vi får från certifikatet och parsar den, hämtar ut
-	 * fältet Common Name (CN = ) och returerar den
-	 */
-	public String getName(String subject){
-        	String name = "";
-        	for(int i = 0; i < subject.length()-2; i++){
-            		if(subject.charAt(i)== 'C' && subject.charAt(i+1) == 'N' && subject.charAt(i+2) == '='){
-                	while(subject.charAt(i+3) != ','){
-                    		name+= subject.charAt(i+3);
-                    		i++;
-                	}
-                	break;
-            	}
-        	}
-        	return name;
-    	}
 	/*
 	 * isAssociated går in i en map som ska vara sparad för varje patient, om
 	 * patientens namn är Alban skulle mapen heta Alban, while loopen stegar igenom
@@ -95,7 +50,6 @@ public class Authorization {
 			br.close();
 		}
 	}
->>>>>>> branch 'master' of https://github.com/drawdehe/MedicalRecords.git
 
 	/*
 	 * getPass tar in vad subjektet vill göra, subjektet som vi fått från
