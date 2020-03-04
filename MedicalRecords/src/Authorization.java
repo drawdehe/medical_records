@@ -45,7 +45,7 @@ public class Authorization {
 	 * group]. när rätt username hittats returneras group. om rätt username inte
 	 * hittas returneras "-1"
 	 */
-	public String getGroup(String ssn_patient) throws FileNotFoundException, IOException {
+	public String getDivison(String ssn_patient) throws FileNotFoundException, IOException {
 //
 //		String file = ssn_patient + ".txt";
 //		BufferedReader br = new BufferedReader(new FileReader(file));
@@ -64,7 +64,7 @@ public class Authorization {
 //		} finally {
 //			br.close();
 //		}
-
+		
 		return "-1";
 		
 	}

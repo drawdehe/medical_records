@@ -1,4 +1,3 @@
-
 public class Authenticator {
 	private String ssn;
 	private String password;
