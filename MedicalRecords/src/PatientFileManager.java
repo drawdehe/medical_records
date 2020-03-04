@@ -16,13 +16,14 @@ public class PatientFileManager {
 		}
 		return new PatientFile(list[0], list[1], list[2], list[3], list[4], list[5]);
 	}
-
-	public String delete(String subject, String patient) throws FileNotFoundException, IOException{
-		File file = new File(patient+ ".txt");
+	
+	//////tog bort subject och har enbart patientSSN kvar
+	public String deleteFile(String fileName) throws FileNotFoundException, IOException{
+		File file = new File(fileName + ".txt");
 		if(file.delete()){
-			return file.getName() + " deleted";
+			return "File deleted!";
 		}else{
-			return "nope";
+			return "File couldn't be deleted!";
 		}
 	}
 	
