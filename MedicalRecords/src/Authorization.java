@@ -73,22 +73,19 @@ public class Authorization {
 	 * tar subject strängen vi får från certifikatet och parsar den, hämtar ut
 	 * fältet Common Name (CN = ) och returerar den
 	 */
-	public String getName(String subject) {
-		String name = "";
-		for (int i = 0; i < subject.length() - 2; i++) {
-			if (subject.charAt(i) == 'C' && subject.charAt(i + 1) == 'N' && subject.charAt(i + 2) == '='
-					&& subject.charAt(i + 3) == '"') {
-				while (subject.charAt(i + 4) != '"') {
-					name += subject.charAt(i + 4);
-					i++;
-				}
-				break;
-
-				// testkommentar
-			}
-		}
-		return name;
-	}
+	public String getName(String subject){
+        	String name = "";
+        	for(int i = 0; i < subject.length()-2; i++){
+            		if(subject.charAt(i)== 'C' && subject.charAt(i+1) == 'N' && subject.charAt(i+2) == '='){
+                	while(subject.charAt(i+3) != ','){
+                    		name+= subject.charAt(i+3);
+                    		i++;
+                	}
+                	break;
+            	}
+        	}
+        	return name;
+    	}
 	/*
 	 * isAssociated går in i en map som ska vara sparad för varje patient, om
 	 * patientens namn är Alban skulle mapen heta Alban, while loopen stegar igenom
