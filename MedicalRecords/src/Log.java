@@ -31,12 +31,13 @@ public class Log {
 //		bw = new BufferedWriter(writer);
 //	}
 	public Log() {
-		try {
-			FileWriter fw = new FileWriter(new File("Log.txt"));
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String hej = "hej";
+		//try {
+		//	FileWriter fw = new FileWriter(new File("Log.txt"));
+		//	fw.close();
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 
 	}
 	
@@ -50,7 +51,8 @@ public class Log {
 
 		try {
 			FileWriter fw = new FileWriter("Log.txt", true);
-			fw.append("(" + System.currentTimeMillis() + ") " + 
+			LocalDateTime time = LocalDateTime.now();
+			fw.append("(" + time + ") " + 
 					"User: " + ssn_user + ", Operation: " + operation + ", Patient: " + ssn_patient +
 					", Access: " + access +"\n");
 			fw.close();
