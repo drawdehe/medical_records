@@ -64,52 +64,51 @@ public class Server implements Runnable {
 			Boolean permission = false;
 
 			Boolean pss = auth.getPass(action,subject, patient, doc);
-            		System.out.println(pss);
 
 			
 			if(action == "read") {
 			
-			if(pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0] || pf.getPatientName() == certInfo[0]
-			|| pf.getPatientDivision() == certInfo[1] || certInfo[2]  == "Government") {
-			permission = true;
+				if(pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0] || pf.getPatientName() == certInfo[0]
+						|| pf.getPatientDivision() == certInfo[1] || certInfo[2]  == "Government") {
+					permission = true;
 			
-			out.println(pf.toString);
-			out.flush();			
-			} 
+					out.println(pf.toString);
+					out.flush();			
+				} 
 			}
 			
 			if(action == "write") {
-			if((certInfo[2]  == "Doctor" || certInfo[2] == "Nurse") && (pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0])) {
-			permission = true;
+				if((certInfo[2]  == "Doctor" || certInfo[2] == "Nurse") && (pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0])) {
+					permission = true;
 			
-			PatientFileManager.writeToFile(patientSSN, data);
+					PatientFileManager.writeToFile(patientSSN, data);
 			
-			out.println("Appended the text!");
-			out.flush();			
-			} 
+					out.println("Appended the text!");
+					out.flush();			
+				} 
 			}
 			
 			if(action == "add") {
-			if(certInfo[2]  == "Doctor") {
-			permission = true;
+				if(certInfo[2]  == "Doctor") {
+					permission = true;
 			
-			String[] pInf = data.split(":");
-			PatientFileManager.createFile(patientSSN, new PatientFile(pInfo[0], patientSSN, certInfo[0], pInfo[3], pInfo[4], pInfo[5]));
+					String[] pInf = data.split(":");
+					PatientFileManager.createFile(patientSSN, new PatientFile(pInfo[0], patientSSN, certInfo[0], pInfo[3], pInfo[4], pInfo[5]));
 			
-			out.println("Added the patient!");
-			out.flush();			
-			} 
+					out.println("Added the patient!");
+					out.flush();			
+				} 
 			}
 			
 			if(action == "delete") {
-			if(certInfo[2]  == "Government") {
-			permission = true;
+				if(certInfo[2]  == "Government") {
+					permission = true;
 			
-			PatientFileManager.deleteFile(patientSSN);
+					PatientFileManager.deleteFile(patientSSN);
 			
-			out.println("Deleted the patient!");
-			out.flush();			
-			} 
+					out.println("Deleted the patient!");
+					out.flush();			
+				} 
 			}	
 			
 			//Error/Deny Message
