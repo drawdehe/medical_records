@@ -114,10 +114,9 @@ public class Authorization {
 	public String getName(String subject) {
 		String name = "";
 		for (int i = 0; i < subject.length() - 2; i++) {
-			if (subject.charAt(i) == 'C' && subject.charAt(i + 1) == 'N' && subject.charAt(i + 2) == '='
-					&& subject.charAt(i + 3) == '"') {
-				while (subject.charAt(i + 4) != '"') {
-					name += subject.charAt(i + 4);
+			if (subject.charAt(i) == 'C' && subject.charAt(i + 1) == 'N' && subject.charAt(i + 2) == '=') {
+				while (subject.charAt(i + 3) != ',') {
+					name += subject.charAt(i + 3);
 					i++;
 				}
 				break;
