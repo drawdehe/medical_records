@@ -17,7 +17,6 @@ public class Server implements Runnable {
 
 	public void run() {
 		try {
-			Authorization auth = new Authorization();
 			SSLSocket socket = (SSLSocket) serverSocket.accept();
 			newListener();
 			SSLSession session = socket.getSession();
@@ -51,24 +50,21 @@ public class Server implements Runnable {
 			String patientSSN = in.readLine(); // SSN
 			String data = in.readLine();
 
-			Authorization authZ = new Authorization();
+			Authorization auth = new Authorization();
 			String[] certInfo = new String[2];
-			certInfo[0] = authZ.getName(subject);
-			certInfo[1] = authZ.getGroupPrivilege(subject)[0];
-			certInfo[2] = authZ.getGroupPrivilege(subject)[1];
+			certInfo[0] = auth.getName(subject);
+			certInfo[1] = auth.getGroupPrivilege(subject)[0];
+			certInfo[2] = auth.getGroupPrivilege(subject)[1];
 
 			PatientFileManager man = new PatientFileManager();
-			Log log = new Log();
 			PatientFile pf = man.readFile(patientSSN);
 			Boolean permission = false;
 
 			if (action == "read") {
-
 				if (pf.getDoctorName() == certInfo[0] || pf.getNurseName() == certInfo[0]
 						|| pf.getPatientName() == certInfo[0] || pf.getDivision() == certInfo[1]
 						|| certInfo[2] == "Government") {
 					permission = true;
-
 					out.println(pf.toString());
 					out.flush();
 				}
@@ -105,6 +101,7 @@ public class Server implements Runnable {
 			}
 
 			// Error/Deny Message
+			Log log = new Log();
 			log.newLogEntry(certInfo[0], patientSSN, action, permission);
 			if (!permission) {
 				out.println("Request to " + action + " has been DENIED! (or failed)");
