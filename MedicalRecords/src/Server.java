@@ -18,6 +18,7 @@ public class Server implements Runnable {
 
 	public void run() {
 		try {
+			Authorization auth = new Authorization();
 			SSLSocket socket = (SSLSocket) serverSocket.accept();
 			newListener();
 			SSLSession session = socket.getSession();
@@ -53,6 +54,7 @@ public class Server implements Runnable {
 			String patientSSN = in.readLine(); //SSN
 			String data = in.readLine();<
 			
+<<<<<<< HEAD
 			String[] certInfo = subject.split("=");
 			for (int i = 1; i < 4; i++) {
 			certInfo[i - 1] = certInfo[i].substring(0, certInfo[i].indexOf(','));
@@ -61,6 +63,10 @@ public class Server implements Runnable {
 			Log log = new log();
 			PatientFile pf = PatientFileManager.readFile(patientSSN);
 			Boolean permission = false;
+=======
+			Boolean pss = auth.getPass(action,subject, patient, doc);
+            		System.out.println(pss);
+>>>>>>> branch 'master' of https://github.com/drawdehe/MedicalRecords.git
 			
 			if(action == "read") {
 			

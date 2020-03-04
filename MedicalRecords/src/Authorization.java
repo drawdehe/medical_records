@@ -17,6 +17,62 @@ public class Authorization {
 	 * hittas returneras "-1"
 	 */
 
+<<<<<<< HEAD
+=======
+		return "-1";
+		
+	}
+
+	/*
+	 * tar subject strängen vi får från certifikatet och parsar den, hämtar ut
+	 * fältet Common Name (CN = ) och returerar den
+	 */
+	public String getName(String subject){
+        	String name = "";
+        	for(int i = 0; i < subject.length()-2; i++){
+            		if(subject.charAt(i)== 'C' && subject.charAt(i+1) == 'N' && subject.charAt(i+2) == '='){
+                	while(subject.charAt(i+3) != ','){
+                    		name+= subject.charAt(i+3);
+                    		i++;
+                	}
+                	break;
+            	}
+        	}
+        	return name;
+    	}
+	/*
+	 * isAssociated går in i en map som ska vara sparad för varje patient, om
+	 * patientens namn är Alban skulle mapen heta Alban, while loopen stegar igenom
+	 * varje line med br.readline(), om den hittar en line som är samma subjektets
+	 * namn returneras true, om det aldrig hittas returneras false. varje line i
+	 * file.txt består endast av ett personnummer på en läkare eller sjuksyster som
+	 * är associerad med patienten.
+	 */
+
+	/*
+	 * isAssociated kollar i en patients journal om en doctor eller nurse är
+	 * associerad med patienten. Var fil inleds med information om vilka doctors och
+	 * nurses som är associerade med patienten, samt dess avdelning. Den
+	 * informationen kollas igenom för att se om det angivna namnet "name" matchar.
+	 */
+	public Boolean isAssociated(String employee_id, String ssn_patient) throws FileNotFoundException, IOException {
+		String file = ssn_patient + ".txt";
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		try {
+			String line = br.readLine();
+
+			while (line != null) {
+				if (line.equals(employee_id)) {
+					return true;
+				}
+				line = br.readLine();
+			}
+			return false;
+		} finally {
+			br.close();
+		}
+	}
+>>>>>>> branch 'master' of https://github.com/drawdehe/MedicalRecords.git
 
 	/*
 	 * getPass tar in vad subjektet vill göra, subjektet som vi fått från
