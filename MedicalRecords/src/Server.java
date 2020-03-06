@@ -36,9 +36,6 @@ public class Server implements Runnable {
             BufferedReader in = null;
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//          String[] res = getGroupPrivilege(subject);
-//          Boolean name = isAssociated(getName(subject), "1");
-//          System.out.println(name);
             String clientMsg = null;
 
             //
@@ -60,10 +57,7 @@ public class Server implements Runnable {
             certInfo[0] = auth.getName(subject);
             certInfo[1] = auth.getGroupPrivilege(subject)[0];
             certInfo[2] = auth.getGroupPrivilege(subject)[1];
-
-            //System.out.println(certInfo[0]);
-            //System.out.println(certInfo[1]);
-            //System.out.println(certInfo[2]);
+            
 
             PatientFileManager man = new PatientFileManager();
             Boolean permission = false;
